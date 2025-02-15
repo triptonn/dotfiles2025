@@ -53,8 +53,8 @@ alias scode="sudo code --no-sandbox"
 
 
 # cht.sh
-alias languages="nvim $HOME/.tmux/tmux-cht-languages"
-alias commands="nvim $HOME/.tmux/tmux-cht-command"
+alias languages="nvim $HOME/.dotfiles/tmux/.tmux/tmux-cht-languages"
+alias commands="nvim $HOME/.dotfiles/tmux/.tmux/tmux-cht-command"
 
 # tmux standard sessions
 alias tmux-left="tmux new -s leftyLeft"
@@ -62,22 +62,12 @@ alias tmux-main="tmux new -s main"
 alias tmux-right="tmux new -s rightyRight"
 
 # i3 and Polybar config shortcut
-alias i3conf="nvim $HOME/.config/i3/config"
-alias pbleft="nvim $HOME/.config/polybar/config-left.ini"
-alias pbmid="nvim $HOME/.config/polybar/config-middle.ini"
-alias pbright="nvim $HOME/.config/polybar/config-right.ini"
+alias i3conf="nvim $HOME/.dotfiles/i3/.config/i3/config"
+alias polybarconf="nvim $HOME/.dotfiles/polybar/.config/polybar/config.ini"
 
 # shell config shortcuts
-alias zshrc="nvim $HOME/.zshrc"
-alias bshrc="nvim $HOME/.bshrc"
-alias tmuxconf="nvim $HOME/.tmux.conf"
-alias i3conf="nvim $HOME/.config/i3/config"
-
-# shell runcom's 
-alias grooster="rm grooster; gcc -g -lstdc++ -std=c++20 -pedantic ./*.cpp -o ./grooster -time; timeout 2 ./grooster"
-alias clrooster="rm clrooster; clang++ -g -lstdc++ -std=c++20 -pedantic ./*.cpp -o ./clrooster; timeout 2 ./clrooster"
-
-# bluetooth
+alias zshrc="nvim $HOME/.dotfiles/zsh/.zshrc"
+alias bshrc="nvim $HOME/.dotfiles/bash/.bshrc"
 alias kh="systemctl start bluetooth.service; sudo bluetoothctl connect 00:1B:66:06:01:FF"
 
 # ssh to pi
@@ -127,8 +117,8 @@ alias la="ls -alF"
 alias h="history|grep"
 alias c="clear" # I know about ctrl l etc.
 alias logout="killall -KILL -u $USER"
-alias files="nemo"
-alias files.="nemo ."
+alias files="dolphin"
+alias files.="dolphin ."
 alias help="cat ~/.zshrc | less"
 
 # cd
@@ -154,10 +144,10 @@ eval "$(fzf --zsh)"
 
 # --- setup fzf theme ---
 fg="#CBE0F0"
-bg="#011628"
-bg_highlight="#143652"
+bg="#16161E"
+bg_highlight="#292E42"
 purple="#B388FF"
-blue="#06BCE4"
+blue="#0A64AC"
 cyan="#2CF9ED"
 
 export FZF_DEFAULT_OPTS="--color=fg:${fg},bg:${bg},hl:${purple},fg+:${fg},bg+:${bg_highlight},hl+:${purple},info:${blue},prompt:${cyan},pointer:${cyan},marker:${cyan},spinner:${cyan},header:${cyan}"
@@ -179,7 +169,7 @@ _fzf_compgen_dir() {
   fd --type=d --hidden --exclude .git . "$1"
 }
 
-source $HOME/.scripts/fzf-git.sh
+source $HOME/.config/fzf-git/fzf-git.sh
 
 show_file_or_dir_preview="if [ -d {} ]; then eza --tree --color=always {} | head -200; else bat -n --color=always --line-range :500 {}; fi"
 
@@ -194,28 +184,26 @@ _fzf_comprun() {
   shift
 
   case "$command" in
-    cd)           fzf --preview 'eza --tree --color=always {} | head -200' "$@" ;;
-    export|unset) fzf --preview "eval 'echo \${}'"         "$@" ;;
-    ssh)          fzf --preview 'dig {}'                   "$@" ;;
-    *)            fzf --preview "$show_file_or_dir_preview" "$@" ;;
+    cd)           fzf --preview "eza --tree --color=always {} | head -200" "$@" ;;
+    export|unset) fzf --preview "eval 'echo \${}'"                         "$@" ;;
+    ssh)          fzf --preview "dig {}"                                   "$@" ;;
+    # docker is WIP
+    docker)       fzf --preview "docker inspect {}"                        "$@" ;;
+    kill)         fzf --preview "ps -f -p {}"                              "$@" ;;
+    *)            fzf --preview "$show_file_or_dir_preview"                "$@" ;;
   esac
 }
 
 # zsh plugins config
 bindkey '^f' autosuggest-accept
 
-
 # ----- Bat (better cat) -----
-
 export BAT_THEME=GitHub
 
 # ---- Eza (better ls) -----
-
 alias ls="eza --icons=always"
 
 # ---- TheFuck -----
-
-# thefuck alias
 eval $(thefuck --alias)
 eval $(thefuck --alias fk)
 
