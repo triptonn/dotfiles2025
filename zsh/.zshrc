@@ -18,6 +18,9 @@ source "$ZSH"/oh-my-zsh.sh
 path+=("$HOME/.local/bin/")
 export PATH
 
+# editor environment
+export EDITOR='nvim'
+
 # Shell stuff
 alias update="yay -Syu"
 
@@ -56,6 +59,9 @@ alias scode="sudo code --no-sandbox"
 alias languages="nvim $HOME/.dotfiles/tmux/.tmux/tmux-cht-languages"
 alias commands="nvim $HOME/.dotfiles/tmux/.tmux/tmux-cht-command"
 
+# tmux config
+alias tmuxconf="nvim $HOME/.dotfiles/tmux/.tmux.conf"
+
 # tmux standard sessions
 alias tmux-left="tmux new -s leftyLeft"
 alias tmux-main="tmux new -s main"
@@ -67,7 +73,9 @@ alias polybarconf="nvim $HOME/.dotfiles/polybar/.config/polybar/config.ini"
 
 # shell config shortcuts
 alias zshrc="nvim $HOME/.dotfiles/zsh/.zshrc"
-alias bshrc="nvim $HOME/.dotfiles/bash/.bshrc"
+alias bashrc="nvim $HOME/.dotfiles/bash/.bashrc"
+
+# bluetooth
 alias kh="systemctl start bluetooth.service; sudo bluetoothctl connect 00:1B:66:06:01:FF"
 
 # ssh to pi
@@ -127,6 +135,8 @@ alias ....="cd ../.."
 alias ......="cd ../../.."
 alias ........="cd ../../../.."
 
+# functionalities
+
 function yy() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
 	yazi "$@" --cwd-file="$tmp"
@@ -184,13 +194,14 @@ _fzf_comprun() {
   shift
 
   case "$command" in
-    cd)           fzf --preview "eza --tree --color=always {} | head -200" "$@" ;;
-    export|unset) fzf --preview "eval 'echo \${}'"                         "$@" ;;
-    ssh)          fzf --preview "dig {}"                                   "$@" ;;
+    cd)           fzf --preview "eza --tree --color=always {} | head -200"                        "$@" ;;
+    rm)           fzf --preview "head -200; else bat -n --color= always --line-range :500 {}; fi" "$@" ;;
+    export|unset) fzf --preview "eval 'echo \${}'"                                                "$@" ;;
+    ssh)          fzf --preview "dig {}"                                                          "$@" ;;
     # docker is WIP
-    docker)       fzf --preview "docker inspect {}"                        "$@" ;;
-    kill)         fzf --preview "ps -f -p {}"                              "$@" ;;
-    *)            fzf --preview "$show_file_or_dir_preview"                "$@" ;;
+    docker)       fzf --preview "docker inspect {}"                                               "$@" ;;
+    kill)         fzf --preview "ps -f -p {}"                                                     "$@" ;;
+    *)            fzf --preview "$show_file_or_dir_preview"                                       "$@" ;;
   esac
 }
 
