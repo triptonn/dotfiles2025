@@ -35,7 +35,7 @@ alias threeMonitors="autorandr -l three_monitor_home; killall -q polybar; ~/.con
 alias mountbackup="sudo mount -o rw,user,uid=1000,umask=007,exec --onlyonce PARTUUID=e8900690-03 $HOME/BackupHDD"
 alias mountdefault="sudo mount -o rw,user,uid=1000,umask=007,exec --onlyonce PARTUUID=e8900690-01 $HOME/old_boot_partition"
 alias mountplaystation="sudo mount -o rw,user,uid=1000,umask=007,exec --onlyonce PARTUUID=e8900690-02 $HOME/PlaystationHDD"
-alias mountdata="sudo mount -o rw,user,uid=1000,umask=007,exec --onlyonce PARTUUID=f1b9ac82-3f9d-4026-b0d3-b7e59c34a9af $HOME/DataSSD"
+alias mountdata="sudo mount -o rw,user,exec --onlyonce UUID=963b910b-11eb-48da-89f1-a96837e08d65 $HOME/DataSSD"
 alias mountdataf="sudo mount -o rw,user,exec --onlyonce UUID=371d8a28-bcbc-4efb-a715-3884851826dd $HOME/DataNVME"
 alias mountwindows="sudo mount -o rw,user,uid=1000,umask=007,exec --onlyonce UUID=0F76318F6A366E58 $HOME/WindowsSSD"
 
@@ -164,8 +164,18 @@ export FZF_DEFAULT_OPTS="--color=fg:${fg},bg:${bg},hl:${purple},fg+:${fg},bg+:${
 
 # -- Use fd instead of fzf --
 export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+tmux_open_widget() {
+  $HOME/.scripts/tmux-open.sh
+  zle reset-prompt
+}
+zle -N tmux_open_widget
+
 export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
+export FZF_CTRL_T_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
+
+# Then bind your tmux-open widget to a different key
+bindkey '^Y' tmux_open_widget  # Example: Using Ctrl+Y instead
 
 # Use fd (https://github.com/sharkdp/fd) for listing path candidates.
 # - The first argument to the function ($1) is the base path to start traversal
@@ -220,4 +230,5 @@ eval $(thefuck --alias fk)
 
 # ---- Zoxide (better cd) ----
 eval "$(zoxide init --cmd cd zsh)"
+
 
