@@ -1,6 +1,6 @@
 ZSH="/usr/share/oh-my-zsh/"
 export ZSH="/usr/share/oh-my-zsh/"
-ZSH_THEME="robbyrussell"
+ZSH_THEME="imajes"
 plugins=(
   git
   zsh-completions
@@ -63,9 +63,9 @@ alias commands="nvim $HOME/.dotfiles/tmux/.tmux/tmux-cht-command"
 alias tmuxconf="nvim $HOME/.dotfiles/tmux/.tmux.conf"
 
 # tmux standard sessions
-alias tmux-left="tmux new -s leftyLeft"
-alias tmux-main="tmux new -s main"
-alias tmux-right="tmux new -s rightyRight"
+alias tmux-left="tmux -2 new -s leftyLeft"
+alias tmux-main="tmux -2 new -s main"
+alias tmux-right="tmux -2 new -s rightyRight"
 
 # i3 and Polybar config shortcut
 alias i3conf="nvim $HOME/.dotfiles/i3/.config/i3/config"
