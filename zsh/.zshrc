@@ -34,7 +34,7 @@ alias threeMonitors="autorandr -l three_monitor_home; killall -q polybar; ~/.con
 # Mounting
 alias mountbackup="sudo mount -o rw,user,uid=1000,umask=007,exec --onlyonce PARTUUID=e8900690-03 $HOME/BackupHDD"
 alias mountdefault="sudo mount -o rw,user,uid=1000,umask=007,exec --onlyonce PARTUUID=e8900690-01 $HOME/old_boot_partition"
-alias mountplaystation="sudo mount -o rw,user,uid=1000,umask=007,exec --onlyonce PARTUUID=e8900690-02 $HOME/PlaystationHDD"
+alias mountplaystation="sudo mount -o rw,user,exec --onlyonce PARTUUID=e8900690-02 $HOME/PlaystationHDD"
 alias mountdata="sudo mount -o rw,user,exec --onlyonce UUID=963b910b-11eb-48da-89f1-a96837e08d65 $HOME/DataSSD"
 alias mountdataf="sudo mount -o rw,user,exec --onlyonce UUID=371d8a28-bcbc-4efb-a715-3884851826dd $HOME/DataNVME"
 alias mountwindows="sudo mount -o rw,user,uid=1000,umask=007,exec --onlyonce UUID=0F76318F6A366E58 $HOME/WindowsSSD"
