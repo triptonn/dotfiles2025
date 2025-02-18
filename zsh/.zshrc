@@ -1,6 +1,6 @@
 ZSH="/usr/share/oh-my-zsh/"
 export ZSH="/usr/share/oh-my-zsh/"
-ZSH_THEME="imajes"
+ZSH_THEME="shibby"
 plugins=(
   git
   zsh-completions
@@ -124,6 +124,7 @@ alias lf="ls -lF"
 alias la="ls -alF"
 alias h="history|grep"
 alias c="clear" # I know about ctrl l etc.
+alias p=pwd
 alias logout="killall -KILL -u $USER"
 alias files="dolphin"
 alias files.="dolphin ."
