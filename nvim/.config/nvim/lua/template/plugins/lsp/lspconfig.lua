@@ -50,10 +50,10 @@ return {
 				keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
 
 				opts.desc = "Go to previous diagnostic"
-				keymap.set("n", "(d", vim.diagnostic.goto_prev, opts)
+				keymap.set("n", "(d", vim.diagnostic.goto_prev, opts) -- changed from [d
 
 				opts.desc = "Go to next diagnostic"
-				keymap.set("n", ")d", vim.diagnostic.goto_next, opts)
+				keymap.set("n", ")d", vim.diagnostic.goto_next, opts) -- changed from ]d
 
 				opts.desc = "Show documentation for what is under cursor"
 				keymap.set("n", "K", vim.lsp.buf.hover, opts)
@@ -93,7 +93,22 @@ return {
 					},
 				})
 			end,
-			["ast_grep"] = function()
+			["pylsp"] = function()
+				lspconfig["pylsp"].setup({
+					capabilities = capabilities,
+					settings = {
+						python = {
+							diagnostics = {
+								globals = { "vim" },
+							},
+							completion = {
+								callSnippet = "Replace",
+							},
+						},
+					},
+				})
+			end,
+			--[[ ["ast_grep"] = function()
 				lspconfig["ast_grep"].setup({
 					capabilities = capabilities,
 					settings = {
@@ -130,7 +145,7 @@ return {
 						},
 					},
 				})
-			end,
+			end, ]]
 		})
 	end,
 }
