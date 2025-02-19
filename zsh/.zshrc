@@ -18,6 +18,9 @@ source "$ZSH"/oh-my-zsh.sh
 path+=("$HOME/.local/bin/")
 export PATH
 
+# export GPG Signing key(?)
+export GPG_TTY=$(tty)
+
 # editor environment
 export EDITOR='nvim'
 
@@ -52,7 +55,8 @@ alias ss="escrotum -s"
 alias scode="sudo code --no-sandbox"
 
 # docker
-
+alias da="docker attach"
+alias db="docker build"
 
 
 # cht.sh
@@ -63,6 +67,7 @@ alias commands="nvim $HOME/.dotfiles/tmux/.tmux/tmux-cht-command"
 alias tmuxconf="nvim $HOME/.dotfiles/tmux/.tmux.conf"
 
 # tmux standard sessions
+alias tmux="tmux -2"
 alias tmux-left="tmux -2 new -s leftyLeft"
 alias tmux-main="tmux -2 new -s main"
 alias tmux-right="tmux -2 new -s rightyRight"
@@ -231,5 +236,4 @@ eval $(thefuck --alias fk)
 
 # ---- Zoxide (better cd) ----
 eval "$(zoxide init --cmd cd zsh)"
-
 
