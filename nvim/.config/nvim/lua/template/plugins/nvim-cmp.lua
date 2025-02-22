@@ -4,6 +4,8 @@ return {
 	dependencies = {
 		"hrsh7th/cmp-buffer", -- source for text in buffer
 		"hrsh7th/cmp-path", -- source for filesystem paths
+		"hrsh7th/cmp-nvim-lsp", -- source for LSP
+		"hrsh7th/cmp-nvim-lua", -- source for nvim lua
 		{
 			"L3MON4D3/LuaSnip",
 			-- follow latest release
@@ -44,14 +46,15 @@ return {
 			}),
 			-- sources for autocompletion
 			sources = cmp.config.sources({
-				{ name = "nvim_lua" },
+				{ name = "nvim_lsp" }, -- LSP
+				{ name = "nvim_lua" }, -- nvim lua
 				{ name = "luasnip" }, -- snippets
 				{ name = "buffer" }, -- text within current buffer
 				{ name = "path" }, -- filesystem paths
 			}),
 			-- Configure lspkind for vs-code like pictograms in completion menu
 			formatting = {
-				fields = {},
+				fields = { "kind", "abbr", "menu" },
 				expandable_indicator = true,
 				format = lspkind.cmp_format({
 					maxwidth = 50,
