@@ -1,22 +1,15 @@
-ZSH="/usr/share/oh-my-zsh/"
-export ZSH="/usr/share/oh-my-zsh/"
-ZSH_THEME="shibby"
-plugins=(
-  git
-  zsh-completions
-  zsh-autosuggestions
-)
+plugins=(git zsh-completions zsh-autosuggestions venv-info virtualenv)
 
 ZSH_CACHE_DIR="$HOME/.cache/oh-my-zsh"
 if [[ ! -d "$ZSH_CACHE_DIR" ]]; then
   mkdir "$ZSH_CACHE_DIR"
 fi
 
-source "$ZSH"/oh-my-zsh.sh
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME="shibby"
 
-# PATH settings
-path+=("$HOME/.local/bin/")
-export PATH
+source "$ZSH/oh-my-zsh.sh"
+source "$ZSH/custom/themes/shibby.zsh-theme"
 
 # export GPG Signing key(?)
 export GPG_TTY=$(tty)
@@ -24,25 +17,37 @@ export GPG_TTY=$(tty)
 # editor environment
 export EDITOR='nvim'
 
+# Pacman
+alias pacman="sudo pacman"
+
 # Shell stuff
 alias update="yay -Syu"
 
-# Virtual Environment
-alias makevenv="sudo python3 -m venv .venv"
+# Virtual Environment specified python version needs to be installed on system
+makevenv() {
+  python$1 -m venv .venv
+}
+
 alias .venv="source .venv/bin/activate"
 
 # Display settings profiles
-alias threeMonitors="autorandr -l three_monitor_home; killall -q polybar; ~/.config/polybar/launch.sh"
+alias threeMonitors="autorandr -l three_monitor_home"
 
 # Mounting
 alias mountbackup="sudo mount -o rw,user,uid=1000,umask=007,exec --onlyonce PARTUUID=e8900690-03 $HOME/BackupHDD"
-##alias mountdefault="sudo mount -o rw,user,uid=1000,umask=007,exec --onlyonce PARTUUID=e8900690-01 $HOME/old_boot_partition"
 alias mountplaystation="sudo mount -o rw,user,exec --onlyonce PARTUUID=e8900690-02 $HOME/PlaystationHDD"
 alias mountdata="sudo mount -o rw,user,exec --onlyonce UUID=963b910b-11eb-48da-89f1-a96837e08d65 $HOME/DataSSD"
 alias mountdataf="sudo mount -o rw,user,exec --onlyonce UUID=371d8a28-bcbc-4efb-a715-3884851826dd $HOME/DataNVME"
 alias mountwindows="sudo mount -o rw,user,uid=1000,umask=007,exec --onlyonce UUID=0F76318F6A366E58 $HOME/WindowsSSD"
 
+alias umountbackup="sudo umount $HOME/BackupHDD"
+alias umountplaystation="sudo umount $HOME/PlaystationHDD"
+alias umountdata="sudo umount $HOME/DataSSD"
+alias umountdataf="sudo umount $HOME/DataNVME"
+alias umountwindows="sudo umount $HOME/WindowsSSD"
+
 alias mountall="mountbackup && mountplaystation && mountdata && mountdataf && mountwindows"
+alias umountall="umountbackup && umountplaystation && umountdata && umountdataf && umountwindows"
 
 # AUR - yay
 alias yeet="yay -Rn"
@@ -59,7 +64,6 @@ alias scode="sudo code --no-sandbox"
 # docker
 alias da="docker attach"
 alias db="docker build"
-
 
 # cht.sh
 alias languages="nvim $HOME/.dotfiles/tmux/.tmux/tmux-cht-languages"
@@ -130,12 +134,12 @@ alias lsb="ls -latrh"
 alias lf="ls -lF"
 alias la="ls -alF"
 alias h="history|grep"
-alias c="clear" # I know about ctrl l etc.
+alias c="clear"
 alias p=pwd
 alias logout="killall -KILL -u $USER"
 alias files="dolphin"
 alias files.="dolphin ."
-alias help="cat ~/.zshrc | less"
+alias help="bat ~/.zshrc | less"
 
 # cd
 alias ..="cd .."
@@ -227,7 +231,7 @@ _fzf_comprun() {
 bindkey '^f' autosuggest-accept
 
 # ----- Bat (better cat) -----
-export BAT_THEME=GitHub
+export BAT_THEME=OneHalfDark
 
 # ---- Eza (better ls) -----
 alias ls="eza --icons=always"
