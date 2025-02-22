@@ -93,6 +93,17 @@ return {
 			capabilities = capabilities,
 			flags = {
 				debounce_text_changes = 150, -- Debounce lsp updates
+				vim.diagnostic.config({
+					virtual_text = true,
+					signs = true,
+					update_in_insert = false,
+					underline = true,
+					severity_sort = true,
+					float = {
+						border = "rounded",
+						source = false,
+					},
+				}),
 			},
 		}
 		mason_lspconfig.setup_handlers({
