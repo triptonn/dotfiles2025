@@ -62,7 +62,11 @@ alias ss="escrotum -s"
 alias scode="sudo code --no-sandbox"
 
 # docker
-alias da="docker attach"
+docker_dev_attach() {
+  docker exec -it $1 zsh
+}
+
+alias da=docker_dev_attach
 alias db="docker build"
 
 # cht.sh
