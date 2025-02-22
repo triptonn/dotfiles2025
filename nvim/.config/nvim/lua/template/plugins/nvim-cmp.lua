@@ -22,9 +22,34 @@ return {
 		local luasnip = require("luasnip")
 		local lspkind = require("lspkind")
 
+		-- Create a variable to track completion state
+		vim.g.cmp_enabled = true
+
+		-- Function to toggle completion
+		local toggle_completion = function()
+			vim.g.cmp_enabled = not vim.g.cmp_enabled
+			if vim.g.cmp_enabled then
+				cmp.setup.buffer({
+					enabled = true,
+				})
+				print("Autocompletion enabled")
+			else
+				cmp.setup.buffer({
+					enabled = false,
+				})
+				print("Autocompletion diabled")
+			end
+		end
+
+		-- Keybinding for toggle cmp
+		vim.keymap.set("n", "<leader>ta", toggle_completion, { desc = "Toggle autocompletion" })
+
 		-- Loads vs-code style snippets from installed plugins (e.g. friendly-snippets)
 		require("luasnip.loaders.from_vscode").lazy_load()
 		cmp.setup({
+			enabled = function()
+				return vim.g.cmp_enabled
+			end,
 			performance = {
 				debounce = 60,
 				throttle = 30,
@@ -32,8 +57,6 @@ return {
 				max_view_entries = 100,
 			},
 			completion = {
-				-- border = "rounded",
-				-- scrollbar = "║",
 				keyword_length = 1, -- Start completion after 1 character
 				completeopt = "menu,menuone,noselect",
 			},
