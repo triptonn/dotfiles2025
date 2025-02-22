@@ -69,18 +69,40 @@ return {
 		})
 
 		local capabilities = cmp_nvim_lsp.default_capabilities()
+		-- Add these performance-related capabilities
+		capabilities.textDocument.completion.completionItem.commitCharactersSupport = false
+		capabilities.textDocument.completion.completionItem.deprecatedSupport = false
+		capabilities.textDocument.completion.completionItem.preselectedSupport = false
+		capabilities.textDocument.completion.completionItem.snippetSupport = true
+		capabilities.textDocument.completion.completionItem.documentationFormat = { "markdown" }
+		capabilities.textDocument.completion.completionItem.resolveSupport = {
+			properties = {
+				"documentation",
+				"detail",
+				"additionalTextEdits",
+			},
+		}
 
-		local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
+		--[[ local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
 		for type, icon in pairs(signs) do
 			local hl = "DiagnosticSign" .. type
 			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-		end
+		end ]]
 
+		local default_lsp_config = {
+			capabilities = capabilities,
+			flags = {
+				debounce_text_changes = 150, -- Debounce lsp updates
+			},
+		}
 		mason_lspconfig.setup_handlers({
 			function(server_name)
-				lspconfig[server_name].setup({
-					capabilities = capabilities,
-				})
+				--	lspconfig[server_name].setup({
+				--		capabilities = capabilities,
+				--	})
+				lspconfig[server_name].setup(vim.tbl_deep_extend("force", default_lsp_config, {
+					-- Server specific options can be added here
+				}))
 			end,
 
 			["lua_ls"] = function()

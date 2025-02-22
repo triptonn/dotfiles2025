@@ -25,11 +25,19 @@ return {
 		-- Loads vs-code style snippets from installed plugins (e.g. friendly-snippets)
 		require("luasnip.loaders.from_vscode").lazy_load()
 		cmp.setup({
-			completion = {
-				border = "rounded",
-				scrollbar = "║",
-				completeopt = "menu,menuone,preview,noselect",
+			performance = {
+				debounce = 60,
+				throttle = 30,
+				fetching_timeout = 200,
+				max_view_entries = 100,
 			},
+			completion = {
+				-- border = "rounded",
+				-- scrollbar = "║",
+				keyword_length = 1, -- Start completion after 1 character
+				completeopt = "menu,menuone,noselect",
+			},
+			preselect = cmp.PreselectMode.None, -- Don't preselect first item
 			snippet = {
 				expand = function(args)
 					luasnip.lsp_expand(args.body)
