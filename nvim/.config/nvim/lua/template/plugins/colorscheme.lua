@@ -24,9 +24,14 @@ return {
 			on_colors = function(colors)
 				colors.bg = bg
 				colors.bg_dark = transparent and colors.none or bg_dark
-				colors.bg_float = transparent and colors.none or bg_dark
+
+				--colors.bg_float = transparent and colors.none or bg_dark
+				colors.bg_float = bg_dark
+
 				colors.bg_highlight = bg_highlight
+
 				colors.bg_popup = bg_dark
+
 				colors.bg_search = bg_search
 				colors.bg_sidebar = transparent and colors.none or bg_dark
 				colors.bg_statusline = transparent and colors.none or bg_dark

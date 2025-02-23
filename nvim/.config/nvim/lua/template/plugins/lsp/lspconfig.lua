@@ -100,6 +100,7 @@ return {
 					underline = true,
 					severity_sort = true,
 					float = {
+						relative = "curosor",
 						border = "rounded",
 						source = false,
 					},
