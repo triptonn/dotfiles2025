@@ -102,7 +102,9 @@ return {
 				-- Programming
 				"c",
 				"cpp",
+				"make",
 				"cmake",
+				"premake",
 				"ninja",
 				"dart",
 				"python",
@@ -123,7 +125,7 @@ return {
 				"gitignore",
 			},
 		})
-		-- Set foldmethod to expr and use tresitter for folding
+		-- Set foldmethod to expr and use treesitter for folding
 		vim.opt.foldmethod = "expr"
 		vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 		vim.opt.foldenable = false -- Disable folding at startup

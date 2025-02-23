@@ -4,10 +4,31 @@ return {
 	config = function()
 		local conform = require("conform")
 
+		local clang_format_style = {
+			BasedOnStyle = "Google",
+			IndentWidth = 4,
+			TabWidth = 4,
+			UseTab = "Never",
+			ColumnLimit = 80,
+			AccessModifierOffset = -8,
+			IndentCaseLabels = false,
+			NamespaceIndentation = "None",
+			BreakBeforeBraces = "Linux",
+			AllowShortFunctionsOnASingleLine = "None",
+		}
+
 		conform.setup({
 			formatters_by_ft = {
+				c = { "clang-format" },
+				cpp = { "clang-format" },
+				cmake = { "cmake_format" },
 				lua = { "stylua" },
 				python = { "isort", "black" },
+			},
+			formatters = {
+				clang_format = {
+					prepend_args = { "--style=" .. vim.json.encode(clang_format_style) },
+				},
 			},
 			format_on_save = {
 				lsp_fallback = true,

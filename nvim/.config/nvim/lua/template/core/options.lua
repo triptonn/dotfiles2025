@@ -19,6 +19,17 @@ opt.shiftwidth = 4 -- 2 spaces for indents width
 opt.expandtab = true -- expand tab to spaces
 opt.autoindent = true -- Copy indent from current line when starting new one
 
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "cpp", "c" },
+	callback = function()
+		vim.opt_local.tabstop = 4
+		vim.opt_local.shiftwidth = 4
+		vim.opt_local.expandtab = true
+		vim.opt_local.cindent = true
+		vim.opt_local.cinoptions = "g0,h8,N-s"
+	end,
+})
+
 opt.wrap = false
 
 -- search settings

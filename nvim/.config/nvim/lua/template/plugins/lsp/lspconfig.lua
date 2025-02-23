@@ -8,6 +8,33 @@ return {
 	},
 	opts = {
 		servers = {
+			clangd = {
+				enable = true,
+				enableCodeCompletion = true,
+				enableHover = true,
+				cmd = {
+					"clangd",
+					"--background-index",
+					"--clang-tidy",
+					"--header-insertion=iwyu",
+					"--completion-style=detailed",
+					"--function-arg-placeholders",
+					"--fallback-style=google",
+				},
+				init_options = {
+					usePlaceholders = true,
+					completeUnimported = true,
+					clangdFileStatus = true,
+					fallbackStyle = "google",
+				},
+				filetypes = {
+					"c",
+					"cpp",
+					"objc",
+					"objcpp",
+					"cuda",
+				},
+			},
 			dartls = {},
 			lua_ls = {},
 			pylsp = {},
@@ -115,7 +142,21 @@ return {
 					-- Server specific options can be added here
 				}))
 			end,
-
+			["clangd"] = function()
+				lspconfig["clangd"].setup({
+					capabilities = capabilities,
+					settings = {
+						Cpp = {
+							diagnostics = {
+								globals = { "vim" },
+							},
+							completion = {
+								callSnippet = "Replace",
+							},
+						},
+					},
+				})
+			end,
 			["lua_ls"] = function()
 				lspconfig["lua_ls"].setup({
 					capabilities = capabilities,
@@ -146,6 +187,21 @@ return {
 					},
 				})
 			end,
+			["harper_ls"] = function()
+				lspconfig["harper_ls"].setup({
+					capabilities = capabilities,
+					settings = {
+						cpp = {
+							diagnostics = {
+								globals = { "vim" },
+							},
+							completion = {
+								callSnippet = "Replace",
+							},
+						},
+					},
+				})
+			end,
 			--[[ ["ast_grep"] = function()
 				lspconfig["ast_grep"].setup({
 					capabilities = capabilities,
@@ -159,21 +215,6 @@ return {
 							},
 						},
 						dart = {
-							diagnostics = {
-								globals = { "vim" },
-							},
-							completion = {
-								callSnippet = "Replace",
-							},
-						},
-					},
-				})
-			end,
-			["clangd"] = function()
-				lspconfig["clangd"].setup({
-					capabilities = capabilities,
-					settings = {
-						Cpp = {
 							diagnostics = {
 								globals = { "vim" },
 							},
