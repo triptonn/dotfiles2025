@@ -112,31 +112,10 @@ alias huionmax="xdotool search --class huiontablet windowmap"
 # Obsidian
 alias obsidian="sudo obsidian --no-sandbox"
 
-# git
-alias g="git"
-alias gad="git add --all"
-alias gcm="git commit -m"
-alias gcms="git commit -S -m"
-alias gph="git push"
-alias gpl="git pull"
-alias gcl="git clone"
-alias gin="git init"
-
-alias gst="git status"
-alias glg="git log -n 5"
-alias glgr="git reflog"
-alias gdf="git diff"
-
-alias gbr="git branch"
-alias gsw="git switch"
-alias gch="git checkout"
-alias gra="git remote add origin git@github.com:"
-alias grs="git remote set-url origin git@github.com:"
-
 # other
 alias lsb="ls -latrh"
-alias lf="ls -lF"
-alias la="ls -alF"
+alias lf="ls -lhF"
+alias la="ls -alhF"
 alias h="history|grep"
 alias c="clear"
 alias p=pwd
