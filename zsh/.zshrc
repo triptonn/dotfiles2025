@@ -112,6 +112,10 @@ alias huionmax="xdotool search --class huiontablet windowmap"
 # Obsidian
 alias obsidian="sudo obsidian --no-sandbox"
 
+# C++
+alias grooster="rm grooster; gcc -g -lstdc++ -std=c++20 -pedantic ./*.cpp -o ./grooster -time; timeout 2 ./grooster"
+alias clrooster="rm clrooster; clang++ -g -lstdc++ -std=c++20 -pedantic ./*.cpp -o ./clrooster; timeout 2 ./clrooster"
+
 # other
 alias lsb="ls -latrh"
 alias lf="ls -lhF"

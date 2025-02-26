@@ -26,3 +26,31 @@ keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer
 -- add empty line
 keymap.set("n", "zk", "m`o<Esc>``", { desc = "Add empty line above cursor" })
 keymap.set("n", "zj", "m`O<Esc>``", { desc = "Add empty line below cursor" })
+
+keymap.set("n", "<F5>", "<cmd>:lua require('dap').continue()<CR>", { desc = "Start debugging / Continue" })
+keymap.set("n", "<F10>", "<cmd>:lua require('dap').step_over()<CR>", { desc = "Step over" })
+keymap.set("n", "<F11>", "<cmd>:lua require('dap').step_into()<CR>", { desc = "Step into" })
+keymap.set("n", "<F12>", "<cmd>:lua require('dap').step_out()<CR>", { desc = "Step out" })
+
+keymap.set("n", "<leader>b", "<cmd>:lua require('dap').toggle_breakpoint()<CR>", { desc = "Toggle breaktpoint" })
+keymap.set("n", "<leader>B", "<cmd>:lua require('dap').set_breakpoint()<CR>", { desc = "Set breaktpoint" })
+keymap.set(
+	"n",
+	"<leader>lp",
+	"<cmd>:lua require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>",
+	{ desc = "Toggle breaktpoint ()" }
+)
+
+keymap.set({ "n", "v" }, "<leader>ih", "<cmd>:lua require('dap.ui.widgets').hover()<CR>", { desc = "Debug hover info" })
+keymap.set(
+	"n",
+	"<leader>if",
+	"<cmd>:lua require('dap.ui.widgets').centered_float(widgets.frames)<CR>",
+	{ desc = "Debug frames" }
+)
+keymap.set(
+	"n",
+	"<leader>is",
+	"<cmd>:lua require('dap.ui.widgets').centered_float(widgets.scopes)<CR>",
+	{ desc = "Debug scopes" }
+)
