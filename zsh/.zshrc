@@ -88,6 +88,7 @@ alias polybarconf="nvim $HOME/.dotfiles/polybar/.config/polybar/config.ini"
 
 # shell config shortcuts
 alias zshrc="nvim $HOME/.dotfiles/zsh/.zshrc"
+alias zshenv="nvim $HOME/.dotfiles/zsh/.zshenv"
 alias bashrc="nvim $HOME/.dotfiles/bash/.bashrc"
 
 # bluetooth
