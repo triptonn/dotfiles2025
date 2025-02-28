@@ -112,9 +112,36 @@ alias huionmax="xdotool search --class huiontablet windowmap"
 # Obsidian
 alias obsidian="sudo obsidian --no-sandbox"
 
-# C++
-alias grooster="rm grooster; gcc -g -lstdc++ -std=c++20 -pedantic ./*.cpp -o ./grooster -time; timeout 2 ./grooster"
-alias clrooster="rm clrooster; clang++ -g -lstdc++ -std=c++20 -pedantic ./*.cpp -o ./clrooster; timeout 2 ./clrooster"
+########################################################
+# C++ Compilers
+alias clangformat="nvim ~/.clang-format"
+
+# GCC
+function grooster() {
+    local filename=$1
+    local base_name="${filename%.*}"
+    if [[ ! -d ./binaries ]]; then
+        echo "Creating directory ./binaries"
+        mkdir "./binaries/"
+    fi
+    [[ -f "./binaries/${base_name}" ]] && rm "./binaries/${base_name}"
+    gcc -g -lstdc++ -std=c++20 -pedantic "${base_name}.cpp" -o "./binaries/${base_name}" -time
+    timeout 2 "./binaries/${base_name}"
+}
+
+# Clang
+function clrooster() {
+    local filename=$1
+    local base_name="${filename%.*}"
+    if [[ ! -d ./binaries ]]; then
+        echo "Creating directory ./binaries"
+        mkdir "./binaries/"
+    fi
+    [[ -f "./binaries/${base_name}" ]] && rm "./binaries/${base_name}"
+    clang++ -g -lstdc++ -std=c++20 -pedantic "${base_name}.cpp" -o "./binaries/${base_name}" -time
+    timeout 2 "./binaries/${base_name}"
+}
+########################################################
 
 # other
 alias lsb="ls -latrh"

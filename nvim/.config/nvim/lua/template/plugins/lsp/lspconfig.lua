@@ -8,6 +8,7 @@ return {
 	},
 	opts = {
 		servers = {
+			clangd = {},
 			dartls = {},
 			lua_ls = {},
 			pylsp = {},
@@ -109,14 +110,28 @@ return {
 		}
 		mason_lspconfig.setup_handlers({
 			function(server_name)
-				--	lspconfig[server_name].setup({
-				--		capabilities = capabilities,
-				--	})
-				lspconfig[server_name].setup(vim.tbl_deep_extend("force", default_lsp_config, {
+				lspconfig[server_name].setup({
+					capabilities = capabilities,
+				})
+				--[[ lspconfig[server_name].setup(vim.tbl_deep_extend("force", default_lsp_config, {
 					-- Server specific options can be added here
-				}))
+				})) ]]
 			end,
-
+            ["bashls"] = function()
+                lspconfig["bashls"].setup({
+                    capabilities = capabilities,
+                    settings = {
+                        Lua = {
+                            diagnostics = {
+                                globals = { "vim" },
+                            },
+                            completion = {
+                                callSnippet = "Replace",
+                            },
+                        },
+                    },
+                })
+            end,
 			["lua_ls"] = function()
 				lspconfig["lua_ls"].setup({
 					capabilities = capabilities,
@@ -169,7 +184,7 @@ return {
 						},
 					},
 				})
-			end,
+			end, ]]
 			["clangd"] = function()
 				lspconfig["clangd"].setup({
 					capabilities = capabilities,
@@ -184,7 +199,7 @@ return {
 						},
 					},
 				})
-			end, ]]
+			end,
 		})
 	end,
 }
