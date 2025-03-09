@@ -39,7 +39,7 @@ return {
 		vim.keymap.set("n", "<leader>ta", toggle_completion, { desc = "Toggle autocompletion" })
 
 		-- Loads vs-code style snippets from installed plugins (e.g. friendly-snippets)
-		--require("luasnip.loaders.from_vscode").lazy_load()
+		require("luasnip.loaders.from_vscode").lazy_load()
 
 		cmp.setup({
 			enabled = function()
@@ -83,8 +83,6 @@ return {
 			-- sources for autocompletion
 			sources = cmp.config.sources({
 				-- reduced and ordered resources for speed
-				{ name = "buffer", max_item_count = 20 }, -- text within current buffer
-				{ name = "path", max_item_count = 10 }, -- filesystem paths
 				{
 					name = "nvim_lsp",
 					max_item_count = 20,
@@ -94,6 +92,8 @@ return {
 				},
 				{ name = "nvim_lua" }, -- nvim lua
 				{ name = "luasnip" }, -- snippets
+				{ name = "buffer", max_item_count = 20 }, -- text within current buffer
+				{ name = "path", max_item_count = 10 }, -- filesystem paths
 			}),
 			preselect = cmp.PreselectMode.None, -- Don't preselect first item
 

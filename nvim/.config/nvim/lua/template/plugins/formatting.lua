@@ -4,30 +4,31 @@ return {
 	config = function()
 		local conform = require("conform")
 
-        local format_options = {
-            lsp_fallback = true,
-            async = false,
-            timeout_ms = 500,
-        }
+		local format_options = {
+			lsp_fallback = true,
+			async = false,
+			timeout_ms = 500,
+		}
 
-        local clang_format_config = {
-            prepend_args = {
-                "--style=file:/home/vscode/.clang-format", "--fallback-style=LLVM"
-            }
-        }
+		local clang_format_config = {
+			prepend_args = {
+				"--style=file:/home/vscode/.clang-format",
+				"--fallback-style=LLVM",
+			},
+		}
 
 		conform.setup({
 			formatters_by_ft = {
-				c = { 'clang_format' },
-				cpp = { 'clang_format' },
+				c = { "clang_format" },
+				cpp = { "clang_format" },
 				lua = { "stylua" },
 				python = { "isort", "black" },
 			},
 			formatters = {
-				--black = {},
+				black = {},
 				clang_format = clang_format_config,
-				--isort = {},
-				--stylua = {},
+				isort = {},
+				stylua = {},
 			},
 			format_on_save = format_options,
 		})

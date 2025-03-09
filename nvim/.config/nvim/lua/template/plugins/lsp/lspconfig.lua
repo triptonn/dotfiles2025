@@ -84,13 +84,13 @@ return {
 			},
 		}
 
-		--[[ local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
+		local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
 		for type, icon in pairs(signs) do
 			local hl = "DiagnosticSign" .. type
 			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-		end ]]
+		end
 
-		local default_lsp_config = {
+		--[[ local default_lsp_config = {
 			capabilities = capabilities,
 			flags = {
 				debounce_text_changes = 150, -- Debounce lsp updates
@@ -101,13 +101,13 @@ return {
 					underline = true,
 					severity_sort = true,
 					float = {
-						relative = "curosor",
+						relative = "cursor",
 						border = "rounded",
 						source = false,
 					},
 				}),
 			},
-		}
+		} ]]
 		mason_lspconfig.setup_handlers({
 			function(server_name)
 				lspconfig[server_name].setup({
@@ -116,51 +116,6 @@ return {
 				--[[ lspconfig[server_name].setup(vim.tbl_deep_extend("force", default_lsp_config, {
 					-- Server specific options can be added here
 				})) ]]
-			end,
-            ["bashls"] = function()
-                lspconfig["bashls"].setup({
-                    capabilities = capabilities,
-                    settings = {
-                        Lua = {
-                            diagnostics = {
-                                globals = { "vim" },
-                            },
-                            completion = {
-                                callSnippet = "Replace",
-                            },
-                        },
-                    },
-                })
-            end,
-			["lua_ls"] = function()
-				lspconfig["lua_ls"].setup({
-					capabilities = capabilities,
-					settings = {
-						Lua = {
-							diagnostics = {
-								globals = { "vim" },
-							},
-							completion = {
-								callSnippet = "Replace",
-							},
-						},
-					},
-				})
-			end,
-			["pylsp"] = function()
-				lspconfig["pylsp"].setup({
-					capabilities = capabilities,
-					settings = {
-						python = {
-							diagnostics = {
-								globals = { "vim" },
-							},
-							completion = {
-								callSnippet = "Replace",
-							},
-						},
-					},
-				})
 			end,
 			--[[ ["ast_grep"] = function()
 				lspconfig["ast_grep"].setup({
@@ -185,11 +140,56 @@ return {
 					},
 				})
 			end, ]]
+			["bashls"] = function()
+				lspconfig["bashls"].setup({
+					capabilities = capabilities,
+					settings = {
+						Lua = {
+							diagnostics = {
+								globals = { "vim" },
+							},
+							completion = {
+								callSnippet = "Replace",
+							},
+						},
+					},
+				})
+			end,
 			["clangd"] = function()
 				lspconfig["clangd"].setup({
 					capabilities = capabilities,
 					settings = {
 						Cpp = {
+							diagnostics = {
+								globals = { "vim" },
+							},
+							completion = {
+								callSnippet = "Replace",
+							},
+						},
+					},
+				})
+			end,
+			["lua_ls"] = function()
+				lspconfig["lua_ls"].setup({
+					capabilities = capabilities,
+					settings = {
+						Lua = {
+							diagnostics = {
+								globals = { "vim" },
+							},
+							completion = {
+								callSnippet = "Replace",
+							},
+						},
+					},
+				})
+			end,
+			["pylsp"] = function()
+				lspconfig["pylsp"].setup({
+					capabilities = capabilities,
+					settings = {
+						python = {
 							diagnostics = {
 								globals = { "vim" },
 							},
