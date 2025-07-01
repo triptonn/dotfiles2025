@@ -25,7 +25,7 @@ exec_always --no-startup-id $HOME/.config/autorandr/init_layout.sh
 exec_always killall -q polybar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
-### running apps on startup ###
+## running apps on startup ###
 
 # run obsidian
 exec sudo obsidian --no-sandbox
@@ -96,7 +96,7 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # run lockscreen
-bindsym $mod+i exec i3lock --image ~/Pictures/wallpapers/background.png --tiling
+# bindsym $mod+i exec i3lock --image ~/Pictures/wallpapers/background.png --tiling
 
 # run blurlock
 # bindsym $mod+i exec ~/.config/i3/blurlock.sh

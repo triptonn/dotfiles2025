@@ -12,7 +12,7 @@ source "$ZSH/oh-my-zsh.sh"
 source "$ZSH/custom/themes/shibby.zsh-theme"
 
 # export GPG Signing key(?)
-export GPG_TTY=$(tty)
+# export GPG_TTY=$(tty)
 
 # editor environment
 export EDITOR='nvim'
@@ -31,23 +31,21 @@ makevenv() {
 alias .venv="source .venv/bin/activate"
 
 # Display settings profiles
-alias threeMonitors="autorandr -l three_monitor_home"
+# alias threeMonitors="autorandr -l three_monitor_home"
 
 # Mounting
 alias mountbackup="sudo mount -o rw,user,uid=1000,umask=007,exec --onlyonce PARTUUID=e8900690-03 $HOME/BackupHDD"
 alias mountplaystation="sudo mount -o rw,user,exec --onlyonce PARTUUID=e8900690-02 $HOME/PlaystationHDD"
-alias mountdata="sudo mount -o rw,user,exec --onlyonce UUID=963b910b-11eb-48da-89f1-a96837e08d65 $HOME/DataSSD"
-alias mountdataf="sudo mount -o rw,user,exec --onlyonce UUID=371d8a28-bcbc-4efb-a715-3884851826dd $HOME/DataNVME"
-alias mountwindows="sudo mount -o rw,user,uid=1000,umask=007,exec --onlyonce UUID=0F76318F6A366E58 $HOME/WindowsSSD"
+alias mountlinux="sudo mount -o rw,user,exec --onlyonce UUID=96DE96D1DE96A8CF $HOME/LinuxSSD"
+alias mountwindows="sudo mount -o rw,user,uid=1000,umask=007,exec --onlyonce UUID=7002A4C402A490A0 $HOME/WindowsSSD"
 
 alias umountbackup="sudo umount $HOME/BackupHDD"
 alias umountplaystation="sudo umount $HOME/PlaystationHDD"
-alias umountdata="sudo umount $HOME/DataSSD"
-alias umountdataf="sudo umount $HOME/DataNVME"
+alias umountlinux="sudo umount $HOME/LinuxSSD"
 alias umountwindows="sudo umount $HOME/WindowsSSD"
 
-alias mountall="mountbackup && mountplaystation && mountdata && mountdataf && mountwindows"
-alias umountall="umountbackup && umountplaystation && umountdata && umountdataf && umountwindows"
+alias mountall="mountbackup && mountplaystation && mountlinux && mountwindows"
+alias umountall="umountbackup && umountplaystation && umountlinux && umountwindows"
 
 # AUR - yay
 alias yeet="yay -Rn"
@@ -59,7 +57,7 @@ alias sp="escrotum -s -C"
 alias ss="escrotum -s"
 
 # Shortcuts for VSCode
-alias scode="sudo code --no-sandbox"
+# alias scode="sudo code --no-sandbox"
 
 # docker
 docker_dev_attach() {
@@ -83,19 +81,21 @@ alias tmux-main="tmux -2 new -s main"
 alias tmux-right="tmux -2 new -s rightyRight"
 
 # i3 and Polybar config shortcut
-alias i3conf="nvim $HOME/.dotfiles/i3/.config/i3/config"
-alias polybarconf="nvim $HOME/.dotfiles/polybar/.config/polybar/config.ini"
+alias i3conf="nvim $HOME/.dotfiles/i3/.i3/config"
+# alias polybarconf="nvim $HOME/.dotfiles/polybar/.config/polybar/config.ini"
 
 # shell config shortcuts
 alias zshrc="nvim $HOME/.dotfiles/zsh/.zshrc"
 alias zshenv="nvim $HOME/.dotfiles/zsh/.zshenv"
 alias bashrc="nvim $HOME/.dotfiles/bash/.bashrc"
+alias vimrc="nvim $HOME/.dotfiles/vim/.vim/.vimrc"
+alias sourcevimrc="cp $HOME/.dotfiles/vim/.vim/.vimrc $HOME/.dotfiles/vim/.obsidian/Yamigo/.vimrc && cd $HOME/.dotfiles && stow -S vim  && cd ~ && echo '.vimrc sourced'"
 
 # bluetooth
-alias kh="systemctl start bluetooth.service; sudo bluetoothctl connect 00:1B:66:06:01:FF"
+# alias kh="systemctl start bluetooth.service; sudo bluetoothctl connect 00:1B:66:06:01:FF"
 
 # ssh to pi
-alias pi="ssh quacksalber@192.168.178.39"
+# alias pi="ssh quacksalber@192.168.178.39"
 
 # sound
 alias sd="pavucontrol"
@@ -144,16 +144,17 @@ function clrooster() {
 }
 ########################################################
 
-# other
+# filesystem info and navigation related
 alias lsb="ls -latrh"
 alias lf="ls -lhF"
 alias la="ls -alhF"
 alias h="history|grep"
 alias c="clear"
 alias p=pwd
+
 alias logout="killall -KILL -u $USER"
-alias files="dolphin"
-alias files.="dolphin ."
+
+alias files="dolphin ."
 alias help="bat ~/.zshrc | less"
 
 # cd
@@ -161,6 +162,8 @@ alias ..="cd .."
 alias ....="cd ../.."
 alias ......="cd ../../.."
 alias ........="cd ../../../.."
+
+########################################################
 
 # functionalities
 
