@@ -35,8 +35,8 @@ alias .venv="source .venv/bin/activate"
 
 # Mounting
 alias mountbackup="sudo mount -o rw,user,uid=1000,umask=007,exec --onlyonce PARTUUID=e8900690-03 $HOME/BackupHDD"
-alias mountplaystation="sudo mount -o rw,user,exec --onlyonce PARTUUID=e8900690-02 $HOME/PlaystationHDD"
-alias mountlinux="sudo mount -o rw,user,exec --onlyonce UUID=96DE96D1DE96A8CF $HOME/LinuxSSD"
+alias mountplaystation="sudo mount -o rw,user,uid=1000,umask=007,exec --onlyonce PARTUUID=e8900690-02 $HOME/PlaystationHDD"
+alias mountlinux="sudo mount -o rw,user,uid=1000,umask=007,exec --onlyonce UUID=96DE96D1DE96A8CF $HOME/LinuxSSD"
 alias mountwindows="sudo mount -o rw,user,uid=1000,umask=007,exec --onlyonce UUID=7002A4C402A490A0 $HOME/WindowsSSD"
 
 alias umountbackup="sudo umount $HOME/BackupHDD"
@@ -89,6 +89,7 @@ alias zshrc="nvim $HOME/.dotfiles/zsh/.zshrc"
 alias zshenv="nvim $HOME/.dotfiles/zsh/.zshenv"
 alias bashrc="nvim $HOME/.dotfiles/bash/.bashrc"
 alias vimrc="nvim $HOME/.dotfiles/vim/.vim/.vimrc"
+alias kittyrc="nvim $HOME/.dotfiles/kitty/.config/kitty-theme.conf"
 alias sourcevimrc="cp $HOME/.dotfiles/vim/.vim/.vimrc $HOME/.dotfiles/vim/.obsidian/Yamigo/.vimrc && cd $HOME/.dotfiles && stow -S vim  && cd ~ && echo '.vimrc sourced'"
 
 # bluetooth
@@ -143,6 +144,11 @@ function clrooster() {
     timeout 2 "./binaries/${base_name}"
 }
 ########################################################
+
+# Lua
+alias lua51="/usr/bin/lua5.1"
+alias lua54="/usr/bin/lua5.4"
+
 
 # filesystem info and navigation related
 alias lsb="ls -latrh"
